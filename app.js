@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var sass = require('node-sass');
 
 var routes = require('./routes/index');
+var apiRoutes = require('./routes/api');
 
 var app = express();
 
@@ -28,6 +29,7 @@ app.use(sass.middleware({
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
+app.use('/api', apiRoutes);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

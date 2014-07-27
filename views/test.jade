@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  div(ng-controller="testAppCtrl")
+  div(ng-controller="testAppCtrl").grid__col.grid__col--3-of-5.grid__col--centered
     h1= title
-    p Welcome to #{title}
+    p Welcome to #{title} - this is Jade
     p(ngCloak) Testing Angular. Hello {{ name || "there!" }}
