@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  div(ng-controller="testAppCtrl")
+    h1= title
+    p Welcome to #{title}
+    p(ngCloak) Testing Angular. Hello {{ name || "there!" }}
