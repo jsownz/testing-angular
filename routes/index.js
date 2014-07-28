@@ -1,9 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var config = require('../private/config');
 
 var pg = require('pg').native,
-    connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/'+config.PG_DATABASE,
+    connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/angular',
     start = new Date(),
     client;
 
