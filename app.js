@@ -6,12 +6,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var sass = require('node-sass');
 var passport = require('passport');
-var Pusher = require('pusher');
-
-var routes = require('./routes/index');
-var apiRoutes = require('./routes/api');
+var dotenv = require('dotenv');
 
 var app = express();
+
+//load env file
+dotenv.load();
 
 
 // view engine setup
@@ -31,6 +31,20 @@ app.use(sass.middleware({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+var debug = require('debug')('app');
+app.set('port', process.env.PORT || 3000);
+
+var server = app.listen(app.get('port'), function() {
+  debug('Express server listening on port ' + server.address().port);
+});
+
+var io = require('socket.io')(server);
+
+var routes = require('./routes/index')(io);
+var apiRoutes = require('./routes/api');
+
+
 app.use('/', routes);
 app.use('/api', apiRoutes);
 
@@ -45,7 +59,7 @@ app.use(function(req, res, next) {
 
 // development error handler
 // will print stacktrace
-if (app.get('env') === 'development') {
+if (process.env.ENVIRONMENT === 'development') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {
@@ -64,6 +78,3 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
-
-module.exports = app;
