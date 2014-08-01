@@ -11,12 +11,9 @@ npm install -b nodemon
 ```
 npm install
 ```
-### create .env file with variables for pusherjs and environment:
+### create .env file with variables for environment:
 ```
 ENVIRONMENT   = 'development'
-PUSHER_APPID  = 'XXXXXX'
-PUSHER_KEY    = 'XXXXXXXXXXXXXXXX'
-PUSHER_SECRET = 'XXXXXXXXXXXXXXXX'
 ```
 
 ### run:
