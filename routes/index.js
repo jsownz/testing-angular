@@ -19,11 +19,6 @@ module.exports = (function(io) {
   /* GET test page. */
   router.get('/test', function(req, res){
 
-    //socket.io
-    io.on('connection', function (socket) {
-      socket.emit('log_environment', { environment: process.env.ENVIRONMENT });
-    });
-
     //connect to psql
     client = new pg.Client(connectionString);
     client.connect();
@@ -37,10 +32,11 @@ module.exports = (function(io) {
     query.on('row', function(result) {
 
       if (!result) {
-        return res.render('test', { title: title, result: 'no results' });
+        res.render('test', { title: title, result: 'no results' });
       } else {
         res.render('test', { title: title, result: 'Visits today: ' + result.count });
       }
+
     });
 
     query.on('end', function() { client.end(); });
